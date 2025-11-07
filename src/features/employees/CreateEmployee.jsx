@@ -3,6 +3,10 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {addEmployee} from "./employeeSlice";
 import {US_STATES} from "../../data/usStates";
+import Input from "../../components/Input";
+import DateInput from "../../components/DateInput";
+import Select from "../../components/Select";
+import FormField from "../../components/FormField";
 
 export default function CreateEmployee() {
   const dispatch = useDispatch();
@@ -29,7 +33,7 @@ export default function CreateEmployee() {
     e.preventDefault();
     if (!form.firstName || !form.lastName) return;
     dispatch(addEmployee(form));
-    // on montrera la Modal plus tard ; pour l'instant on redirige
+    // la Modal sera affichée plus tard ; pour l'instant on redirige
     navigate("/employees");
   };
 
@@ -42,154 +46,64 @@ export default function CreateEmployee() {
 
       <form onSubmit={onSubmit} className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-              First Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              value={form.firstName}
-              onChange={onChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-              placeholder="John"
-            />
-          </div>
+          <FormField id="firstName" label="First Name" required>
+            <Input id="firstName" name="firstName" value={form.firstName} onChange={onChange} required placeholder="John" />
+          </FormField>
 
-          <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-              Last Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              value={form.lastName}
-              onChange={onChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-              placeholder="Doe"
-            />
-          </div>
+          <FormField id="lastName" label="Last Name" required>
+            <Input id="lastName" name="lastName" value={form.lastName} onChange={onChange} required placeholder="Doe" />
+          </FormField>
 
-          <div>
-            <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
-              Date of Birth
-            </label>
-            <input
-              id="dateOfBirth"
-              type="date"
-              name="dateOfBirth"
-              value={form.dateOfBirth}
-              onChange={onChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-            />
-          </div>
+          <FormField id="dateOfBirth" label="Date of Birth">
+            <DateInput id="dateOfBirth" name="dateOfBirth" value={form.dateOfBirth} onChange={onChange} />
+          </FormField>
 
-          <div>
-            <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-2">
-              Start Date
-            </label>
-            <input
-              id="startDate"
-              type="date"
-              name="startDate"
-              value={form.startDate}
-              onChange={onChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-            />
-          </div>
+          <FormField id="startDate" label="Start Date">
+            <DateInput id="startDate" name="startDate" value={form.startDate} onChange={onChange} />
+          </FormField>
         </div>
 
         <fieldset className="mb-6 pt-6 border-t border-gray-200">
           <legend className="text-lg font-semibold text-gray-900 mb-4 px-2">Address</legend>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="md:col-span-2">
-              <label htmlFor="street" className="block text-sm font-medium text-gray-700 mb-2">
-                Street
-              </label>
-              <input
-                id="street"
-                name="street"
-                type="text"
-                value={form.street}
-                onChange={onChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-                placeholder="123 Main Street"
-              />
-            </div>
+            <FormField id="street" label="Street" className="md:col-span-2">
+              <Input id="street" name="street" value={form.street} onChange={onChange} placeholder="123 Main Street" />
+            </FormField>
 
-            <div>
-              <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
-                City
-              </label>
-              <input
-                id="city"
-                name="city"
-                type="text"
-                value={form.city}
-                onChange={onChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-                placeholder="New York"
-              />
-            </div>
+            <FormField id="city" label="City">
+              <Input id="city" name="city" value={form.city} onChange={onChange} placeholder="New York" />
+            </FormField>
 
-            <div>
-              <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">
-                State
-              </label>
-              <select
+            <FormField id="state" label="State">
+              <Select
                 id="state"
                 name="state"
                 value={form.state}
                 onChange={onChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white">
-                <option value="">Select a state…</option>
-                {US_STATES.map((s) => (
-                  <option key={s.abbreviation} value={s.abbreviation}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-2">
-                Zip Code
-              </label>
-              <input
-                id="zipCode"
-                type="text"
-                name="zipCode"
-                value={form.zipCode}
-                onChange={onChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-                placeholder="10001"
+                placeholder="Select a state…"
+                options={US_STATES.map((s) => ({
+                  value: s.abbreviation,
+                  label: s.name
+                }))}
               />
-            </div>
+            </FormField>
+
+            <FormField id="zipCode" label="Zip Code">
+              <Input id="zipCode" name="zipCode" type="text" value={form.zipCode} onChange={onChange} placeholder="10001" />
+            </FormField>
           </div>
         </fieldset>
 
-        <div className="mb-6">
-          <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-2">
-            Department
-          </label>
-          <select
+        <FormField id="department" label="Department" className="mb-6">
+          <Select
             id="department"
             name="department"
             value={form.department}
             onChange={onChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white">
-            <option value="">Select a department…</option>
-            <option value="Sales">Sales</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Human Resources">Human Resources</option>
-            <option value="Legal">Legal</option>
-          </select>
-        </div>
+            placeholder="Select a department…"
+            options={["Sales", "Marketing", "Engineering", "Human Resources", "Legal"]}
+          />
+        </FormField>
 
         <div className="flex justify-end gap-4 pt-4 border-t border-gray-200">
           <button
