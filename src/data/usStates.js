@@ -1,3 +1,8 @@
+/**
+ * Liste des États et territoires des États-Unis avec leurs abréviations
+ * Utilisé pour le champ de sélection "State" dans le formulaire de création d'employé
+ * @type {Array<{name: string, abbreviation: string}>}
+ */
 export const US_STATES = [
   {name: "Alabama", abbreviation: "AL"},
   {name: "Alaska", abbreviation: "AK"},

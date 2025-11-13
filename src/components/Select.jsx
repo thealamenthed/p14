@@ -1,3 +1,15 @@
+/**
+ * Composant Select réutilisable pour les listes déroulantes
+ * @param {Object} props - Les propriétés du composant
+ * @param {string} props.id - L'identifiant unique du select
+ * @param {string} props.name - Le nom du select (utilisé pour le formulaire)
+ * @param {string} props.value - La valeur sélectionnée
+ * @param {Function} props.onChange - Fonction appelée lors du changement de sélection
+ * @param {Array<string|Object>} [props.options=[]] - Liste des options. Peut être un tableau de strings ou d'objets {value, label}
+ * @param {string} [props.placeholder="Select an option…"] - Texte affiché par défaut
+ * @param {string} [props.className=""] - Classes CSS supplémentaires
+ * @returns {JSX.Element} Un élément select stylisé avec Tailwind CSS
+ */
 export default function Select({id, name, value, onChange, options = [], placeholder = "Select an option…", className = ""}) {
   return (
     <select

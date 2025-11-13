@@ -1,5 +1,10 @@
 import {NavLink} from "react-router-dom";
 
+/**
+ * Composant Navbar - Barre de navigation principale de l'application
+ * Affiche le logo HRnet et les liens de navigation vers les pages principales
+ * @returns {JSX.Element} Une barre de navigation avec liens actifs stylisés
+ */
 export default function Navbar() {
   return (
     <header className="border-b bg-white shadow-sm">
@@ -7,7 +12,6 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold text-indigo-600">HRnet</h1>
-            <span className="text-shadow-xs text-gray-500 hidden sm:inline">Employee Management System</span>
           </div>
           <nav className="flex gap-1">
             <NavLink
