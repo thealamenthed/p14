@@ -7,7 +7,7 @@ import Input from "../../components/Input";
 import DateInput from "../../components/DateInput";
 import Select from "../../components/Select";
 import FormField from "../../components/FormField";
-import Modal from "../../components/Modal";
+import {Modal} from "@thealamenthed/wealthhealth-modal";
 
 /**
  * Composant CreateEmployee - Formulaire de création d'employé

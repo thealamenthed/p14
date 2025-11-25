@@ -152,44 +152,78 @@ Les données sont automatiquement sauvegardées dans `localStorage` pour persist
 
 ## 📊 Analyse de performance (Lighthouse)
 
-L'audit a été réalisé avant et après la migration vers React.  
-Chaque mesure correspond à la médiane de 5 exécutions (mode mobile 4G lente).
+Dans le cadre de la migration de l’application HRnet de jQuery vers React, des audits Lighthouse ont été réalisés avant et après refonte.
 
-| Page            | Version jQuery           | Version React           | Gain    |
-| --------------- | ------------------------ | ----------------------- | ------- |
-| Create Employee | LCP : 3.1s / TBT : 280ms | LCP : 1.8s / TBT : 90ms | ✅ -40% |
-| Employee List   | JS bundle : 720 KB       | JS bundle : 290 KB      | ✅ -60% |
+Les résultats complets sont disponibles dans le dossier :
 
-🔍 Les améliorations proviennent de la suppression de jQuery et des plugins lourds (jquery.modal, jquery.datetimepicker, DataTables).
+```
+audits/
+  ├── lighthouse-old-create-employee.json
+  ├── lighthouse-old-employee-list.json
+  ├── lighthouse-new-create-employee.json
+  └── lighthouse-new-employee-list.json
+```
+
+### 🧪 Méthodologie
+
+- Mode : **Desktop (Lighthouse)**
+- 5 fois par page
+- Comparaison sur les pages :
+  - `Create Employee`
+  - `Employee List`
+- Mesures réalisées sur la version jQuery puis sur la version React buildée (`npm run build`)
+
+---
+
+## 📈 Résultats synthétiques
+
+### 🔹 Create Employee
+
+| Indicateur  | Ancienne version (jQuery) | Nouvelle version (React) | Amélioration  |
+| ----------- | ------------------------- | ------------------------ | ------------- |
+| LCP         | ~0.67 s                   | ~0.45 s                  | ✔ Plus rapide |
+| Speed Index | ~0.66 s                   | ~0.47 s                  | ✔ Plus fluide |
+
+Fichiers associés :
+
+- `lighthouse-old-create-employee.json`
+- `lighthouse-new-create-employee.json`
 
 ---
 
-## 🧱 Étapes suivantes
+### 🔹 Employee List
 
-- 🔧 Créer un composant React `<Modal />` (accessibilité + Tailwind)
-- 📦 Publier ce composant en package npm : `@wealthhealth/modal`
-- 🔁 Remplacer les plugins restants :
-  - DatePicker → `react-datepicker`
-  - Dropdown → `@headlessui/react`
-  - Table → `@tanstack/react-table`
-- 🧪 Ajouter des tests unitaires (Vitest + React Testing Library)
-- 📈 Réaliser un rapport final de performance (avant/après React)
+| Indicateur  | Ancienne version (jQuery) | Nouvelle version (React) | Amélioration  |
+| ----------- | ------------------------- | ------------------------ | ------------- |
+| LCP         | ~0.47 s                   | ~0.42 s                  | ✔ Plus rapide |
+| Speed Index | ~0.47 s                   | ~0.41 s                  | ✔ Plus fluide |
+
+Fichiers associés :
+
+- `lighthouse-old-employee-list.json`
+- `lighthouse-new-employee-list.json`
 
 ---
+
+## 🟩 Conclusion
+
+La migration vers React permet :
+
+- Une réduction importante du JavaScript chargé
+- Une amélioration du temps de chargement
+- Une interface plus fluide
+- Une suppression de toute la dette technique liée aux plugins jQuery
+
+L’ensemble des rapports JSON peut être chargé dans Lighthouse pour vérifier les résultats en détail.
+
+---
+
+## 🎥 Aperçu de l’application
+
+![Demo](./src/assets/Demo.gif)
 
 ## 📜 Auteur
 
 - 👤 **Développeuse** : Dalila Lé
 - 🏫 **Formation** : OpenClassrooms — Développeur d'application - JavaScript React
 - 📅 **Année** : 2025
-
----
-
-## 📸 Annexes — Rapport de Performance
-
-| Version jQuery                        | Version React                                     |
-| ------------------------------------- | ------------------------------------------------- |
-| Lighthouse Score : **61**             | Lighthouse Score : **93**                         |
-| Bundle lourd, TBT élevé, DOM bloquant | Chargement plus rapide, JS optimisé, rendu fluide |
-
-**Conclusion** : La migration vers React apporte une réduction notable du poids du bundle, une meilleure réactivité de l'interface, et un codebase moderne, évolutif et testable.
